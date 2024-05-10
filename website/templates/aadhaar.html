@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+
+
+
+<form method="POST" enctype="multipart/form-data" action="/aadhar" >
+    <input type="file" name="filename" id="note" class="form-control">
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary" value="upload" >Upload Aadhaar</button>
+    </div>
+  </form>
+
+  <ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item">
+      {{ note.data }}
+      <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endblock %}

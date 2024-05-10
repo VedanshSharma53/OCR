@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes %}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+
+
+<form id= "myForm" action = "/redirect" method = "post">
+  <label for="options">Select a document to upload:</label>
+  <select name="options" id="options">
+      <option value="option1">Aadhaar Card</option>
+      <option value="option2">PAN Card</option>
+      <option value="option3">Passport</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+
+
+
+  <script>
+    function autofillForm() {
+      fetch('./data.json')
+        .then(response => response.json())
+        .then(data => {
+          // const lines = data.split('\n');
+          // const lines = data
+          // for(const [ key, value ] of Object.entries(data)) {
+          //   // const [fieldName, value] = line;
+          //   const input = document.getElementById(key);
+          //   console.log(key);
+          //   if (input) {
+          //     input.value = value;
+          //   }
+          // };
+          for(const [ key, value ] of Object.entries(data)){ 
+            document.getElementById(key).value = data.key;
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+  </script>
+{% endblock %}
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autofill Form</title>
+</head>
+<body>
+  <h1>Autofill Form</h1>
+  <form id="myForm">
+    <label for="Name">Name:</label>
+    <input type="text" id="Name" name="name"><br><br>
+    <label for="DOB">DOB:</label>
+    <input type="text" id="DOB" name="dob"><br><br>
+    <label for="Gender">Gender:</label>
+    <input type="State" id="Gender" name="dob"><br><br>
+    <label for="State">State:</label>
+    <input type="text" id="State" name="dob"><br><br>
+    <label for="City">City:</label>
+    <input type="text" id="City" name="dob"><br><br>
+    <label for="Pincode">Pincode:</label>
+    <input type="text" id="Pincode" name="dob"><br><br>
+    <label for="Address">Address:</label><br>
+    <textarea id="Address" name="Address" rows="4" cols="50"></textarea><br><br>
+    <button type="button" onclick="autofillForm()">Autofill Form</button>
+    <button type="submit">Save</button>
+  </form>
+
+  <script>
+    function autofillForm() {
+      fetch('./data.json')
+        .then(response => response.json())
+        .then(data => {
+          // const lines = data.split('\n');
+          // const lines = data
+          // for(const [ key, value ] of Object.entries(data)) {
+          //   // const [fieldName, value] = line;
+          //   const input = document.getElementById(key);
+          //   console.log(key);
+          //   if (input) {
+          //     input.value = value;
+          //   }
+          // };
+          for(const [ key, value ] of Object.entries(data)){ 
+            document.getElementById(key).value = data.key;
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+  </script>
+</body>
+</html>
